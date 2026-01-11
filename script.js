@@ -3,31 +3,39 @@
  *************************************/
 const ID_DATABASE = {
   "Bobby Anderson": "Enabled",
-  "Billy Anderson": "Enabled",
   "Heidi Anderson": "Disabled",
-  "STAFF-77": "Disabled"
+  "Billy Anderson": "Enabled"
 };
 /*************************************/
 
 function checkScan() {
   const result = document.getElementById("result");
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const name = params.get("id");
 
-  if (!id) {
+  // No ID provided
+  if (!name) {
     result.className = "denied";
-    result.innerHTML = "NO ID<br>❌";
+    result.innerHTML = "DENIED<br><span class='name'>NO NAME</span> ❌";
     return;
   }
 
-  const status = ID_DATABASE[id];
+  const status = ID_DATABASE[name];
 
   if (status === "Enabled") {
     result.className = "approved";
-    result.innerHTML = "APPROVED<br>✅";
+    result.innerHTML = `
+      APPROVED<br>
+      <span class="name">${name}</span><br>
+      ✅
+    `;
   } else {
     result.className = "denied";
-    result.innerHTML = "DENIED<br>❌";
+    result.innerHTML = `
+      DENIED<br>
+      <span class="name">${name}</span><br>
+      ❌
+    `;
   }
 }
 
