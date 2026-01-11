@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a2a3a, #0b0f14);
+  color: white;
+}
+
+/* Scan page */
+.scan-body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.approved, .denied {
+  text-align: center;
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  animation: pop 0.4s ease-out;
+}
+
+.approved {
+  color: #00ff88;
+  text-shadow: 0 0 40px rgba(0,255,136,0.4);
+}
+
+.denied {
+  color: #ff3b3b;
+  text-shadow: 0 0 40px rgba(255,59,59,0.4);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
