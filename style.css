@@ -1,47 +1,160 @@
+/* =========================
+   GLOBAL RESET & BASE
+   ========================= */
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-}
-
-body {
   margin: 0;
-  background: radial-gradient(circle at top, #1a2a3a, #0b0f14);
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================
+   BACKGROUND
+   ========================= */
+body {
+  background:
+    radial-gradient(circle at top, #1f3b4d, #0a0f14 70%),
+    linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: white;
+  overflow: hidden;
 }
 
-/* Scan page */
+/* =========================
+   SCAN SCREEN LAYOUT
+   ========================= */
 .scan-body {
-  height: 100vh;
+  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.approved, .denied {
+#result {
   text-align: center;
-  font-size: 72px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  animation: pop 0.4s ease-out;
+  padding: 60px 40px;
+  border-radius: 28px;
+  min-width: 280px;
+  max-width: 90vw;
+  animation: fadeInScale 0.5s ease-out;
 }
 
+/* =========================
+   APPROVED STATE
+   ========================= */
 .approved {
+  background: rgba(0, 255, 136, 0.12);
+  border: 2px solid rgba(0, 255, 136, 0.35);
+  box-shadow:
+    0 0 40px rgba(0, 255, 136, 0.35),
+    0 25px 80px rgba(0, 0, 0, 0.6);
+}
+
+.approved::before {
+  content: "✔";
+  display: block;
+  font-size: 120px;
+  margin-bottom: 15px;
   color: #00ff88;
-  text-shadow: 0 0 40px rgba(0,255,136,0.4);
+  text-shadow: 0 0 40px rgba(0, 255, 136, 0.7);
 }
 
+/* =========================
+   DENIED STATE
+   ========================= */
 .denied {
-  color: #ff3b3b;
-  text-shadow: 0 0 40px rgba(255,59,59,0.4);
+  background: rgba(255, 59, 59, 0.12);
+  border: 2px solid rgba(255, 59, 59, 0.35);
+  box-shadow:
+    0 0 40px rgba(255, 59, 59, 0.35),
+    0 25px 80px rgba(0, 0, 0, 0.6);
 }
 
-@keyframes pop {
+.denied::before {
+  content: "✖";
+  display: block;
+  font-size: 120px;
+  margin-bottom: 15px;
+  color: #ff3b3b;
+  text-shadow: 0 0 40px rgba(255, 59, 59, 0.7);
+}
+
+/* =========================
+   TEXT STYLES
+   ========================= */
+.approved,
+.denied {
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.name {
+  display: block;
+  margin-top: 12px;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  opacity: 0.95;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+@keyframes fadeInScale {
   from {
-    transform: scale(0.8);
     opacity: 0;
+    transform: scale(0.85);
   }
   to {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }
+
+/* =========================
+   MOBILE OPTIMIZATION
+   ========================= */
+@media (max-width: 480px) {
+  .approved,
+  .denied {
+    font-size: 48px;
+    letter-spacing: 3px;
+  }
+
+  .approved::before,
+  .denied::before {
+    font-size: 96px;
+  }
+
+  .name {
+    font-size: 28px;
+  }
+
+  #result {
+    padding: 45px 25px;
+  }
+}
+
+/* =========================
+   LARGE SCREENS / KIOSK
+   ========================= */
+@media (min-width: 900px) {
+  .approved,
+  .denied {
+    font-size: 72px;
+  }
+
+  .approved::before,
+  .denied::before {
+    font-size: 140px;
+  }
+
+  .name {
+    font-size: 40px;
+  }
+}
+
